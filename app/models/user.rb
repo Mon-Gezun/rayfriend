@@ -12,4 +12,12 @@ class User < ApplicationRecord
   def name
     "#{first_name} #{last_name}"
   end
+
+  def friend?(user)
+    friend_ids.include? user.id
+  end
+
+  def not_friend?(user)
+    friend_ids.exclude? user.id
+  end
 end
