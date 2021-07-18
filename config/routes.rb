@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   root to: "friends#index"
 
   resources :users
-  resources :friend
+  resources :friends
+  resources :friend_requests
 
   post "/friend/:user_id", to: "friends#create"
 end

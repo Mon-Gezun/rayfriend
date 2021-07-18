@@ -18,6 +18,14 @@ class User < ApplicationRecord
     friend_ids.include? user.id
   end
 
+  def friend_request(user)
+    friend_requests.find_by(friend_id: user.id)
+  end
+
+  def connection(user)
+    connections.find_by(friend_id: user.id)
+  end
+
   def not_friend?(user)
     friend_ids.exclude? user.id
   end

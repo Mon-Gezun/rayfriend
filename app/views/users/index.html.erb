@@ -5,6 +5,7 @@
     <tr>
       <th>Name</th>
       <th>Relationship</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
@@ -12,9 +13,7 @@
     <tr>
       <td><%= user.name %></td>
       <td><%= relationship(user) %></td>
-      <td><%= current_user.friend_requestable?(user) \
-        ? button_to("Friend Request", friend_url(user.id)) \
-        : "" %></td>
+      <td><%= action(user) %></td>
     </tr>
   <% end %>
   </tbody>
