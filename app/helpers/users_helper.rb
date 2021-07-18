@@ -13,7 +13,10 @@ module UsersHelper
 
   def action(user)
     if current_user.friend_requestable?(user)
-      button_to("Friend Request", friend_url(user.id))
+      button_to(
+        "Friend Request",
+        friend_requests_url(id: user.id, method: :post)
+      )
 
     elsif current_user.friend?(user)
       button_to "Unfriend",
