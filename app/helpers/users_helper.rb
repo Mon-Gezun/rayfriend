@@ -13,9 +13,16 @@ module UsersHelper
 
   def action(user)
     if current_user.pending_connect_request?(user)
-      button_to 'Accept', friend_request_path(
-        current_user.pending_connect_request(user)
-      ), :method => :patch
+      "<div class='nowrap'>
+        #{button_to('Accept', friend_request_path(
+          current_user.pending_connect_request(user)
+        ), method: :patch)}
+        #{button_to('Reject', friend_request_path(
+            current_user.pending_connect_request(user)
+          ), method: :delete,
+          data: { confirm: "Reject friend request?" }
+        )}
+      <div>".html_safe
 
     elsif current_user.friend_requestable?(user)
       button_to(
