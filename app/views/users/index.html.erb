@@ -12,6 +12,9 @@
     <tr>
       <td><%= user.name %></td>
       <td><%= relationship(user) %></td>
+      <td><%= current_user.friend_requestable?(user) \
+        ? button_to("Friend Request", friend_url(user.id)) \
+        : "" %></td>
     </tr>
   <% end %>
   </tbody>

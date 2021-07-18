@@ -6,6 +6,7 @@ class User < ApplicationRecord
   validates :last_name, presence: true
 
   has_many :connections
+  has_many :friend_requests
 
   has_many :friends, through: :connections
 
@@ -19,5 +20,17 @@ class User < ApplicationRecord
 
   def not_friend?(user)
     friend_ids.exclude? user.id
+  end
+
+  def friend_requestable?(user)
+    id != user.id \
+      && not_friend?(user) \
+      && !pending_friend_request?(user)
+  end
+
+  def pending_friend_request?(user)
+    friend_requests
+      .where(friend_id: user.id)
+      .where(accepted: false).any?
   end
 end
