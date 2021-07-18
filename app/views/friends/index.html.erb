@@ -1,2 +1,9 @@
 <h1>Friends List</h1>
 
+<table>
+  <% @friends.each do |friend| %>
+    <tr>
+      <td><%= friend[:name] %></td>
+    </tr>
+  <% end %>
+</table>
