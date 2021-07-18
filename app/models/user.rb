@@ -46,9 +46,13 @@ class User < ApplicationRecord
   end
 
   def pending_connect_request?(user)
-    # binding.pry
     connect_requests
       .where(user_id: user.id)
       .where(accepted: false).any?
+  end
+
+  def pending_connect_request(user)
+    connect_requests
+      .find_by(user_id: user.id, accepted: false)
   end
 end

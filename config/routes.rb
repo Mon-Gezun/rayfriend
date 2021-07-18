@@ -8,6 +8,4 @@ Rails.application.routes.draw do
   resources :users
   resources :friends
   resources :friend_requests
-
-  post "/friend/:user_id", to: "friends#create"
 end

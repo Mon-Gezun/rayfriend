@@ -12,7 +12,12 @@ module UsersHelper
   end
 
   def action(user)
-    if current_user.friend_requestable?(user)
+    if current_user.pending_connect_request?(user)
+      button_to 'Accept', friend_request_path(
+        current_user.pending_connect_request(user)
+      ), :method => :patch
+
+    elsif current_user.friend_requestable?(user)
       button_to(
         "Friend Request",
         friend_requests_url(id: user.id, method: :post)
@@ -27,9 +32,6 @@ module UsersHelper
         },
         method: :delete,
         data: { confirm: "Would you like to unfriend?" }
-
-    elsif current_user.pending_connect_request?(user)
-      "Accept or Reject"
 
     elsif current_user.pending_friend_request?(user)
       button_to "Cancel",
