@@ -7,6 +7,9 @@ class User < ApplicationRecord
 
   has_many :connections
   has_many :friend_requests
+  has_many :connect_requests,
+    class_name: "FriendRequest",
+    foreign_key: :friend_id
 
   has_many :friends, through: :connections
 
@@ -39,6 +42,13 @@ class User < ApplicationRecord
   def pending_friend_request?(user)
     friend_requests
       .where(friend_id: user.id)
+      .where(accepted: false).any?
+  end
+
+  def pending_connect_request?(user)
+    # binding.pry
+    connect_requests
+      .where(user_id: user.id)
       .where(accepted: false).any?
   end
 end

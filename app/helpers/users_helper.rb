@@ -28,6 +28,9 @@ module UsersHelper
         method: :delete,
         data: { confirm: "Would you like to unfriend?" }
 
+    elsif current_user.pending_connect_request?(user)
+      "Accept or Reject"
+
     elsif current_user.pending_friend_request?(user)
       button_to "Cancel",
         {
